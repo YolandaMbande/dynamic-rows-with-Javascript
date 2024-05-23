@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Student</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        th, td {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create A Student</h1>
+    <p>
+        Please fill in the form below to create a student.
+    </p>
+    <form id="studentForm" action="CreateStudent.do" method="POST" enctype="multipart/form-data">
+        <table id="studentTable">
+            <tr>
+                <td>Name :</td>
+                <td><input type="text" name="name" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Image :</td>
+                <td><input type="file" name="image" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Module(s) :</td>
+                <td><input type="text" name="modules[]" required></td>
+                <td><button type="button" onclick="addModuleRow(this)">Add Module</button></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="CREATE">
+    </form>
+    
+    <p>
+        When done uploading ----> <a href="index.html">GO BACK!</a>
+    </p>
+    <script>
+        function addModuleRow(button) {
+            var currentRow = button.parentNode.parentNode;
+
+            // Clone the current row
+            var newRow = currentRow.cloneNode(true);
+
+            // Clear the module input field in the new row
+            newRow.querySelectorAll('input[name="modules[]"]').forEach(input => {
+                input.value = '';
+            });
+
+            // Add the new row after the current row
+            currentRow.parentNode.insertBefore(newRow, currentRow.nextSibling);
+        }
+    </script>
+</body>
+</html>
+
